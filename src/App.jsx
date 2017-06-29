@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
     let allMessages=[];
     let dataGiven={
-        currentUser: {name: "Bob"}, // optional. if currentUser is not defined, it means the user is Anonymous
+        currentUser: {name: ""}, // optional. if currentUser is not defined, it means the user is Anonymous
         messages: [{id:1, username: "Bob",content: "Has anyone seen my marbles?"},
                     {id:2, username: "Anonymous",content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."}]
     }
@@ -38,25 +38,26 @@ class App extends Component {
 
     // Update the state of the app component.
     // Calling setState will trigger a call to render() in App and all child components.
-    this.setState({allMessages: allMessages});
     this.setState({loading: true});
-
     this.socket.addEventListener('message',(eventFromWSS)=>{
-    let newMessage=JSON.parse(eventFromWSS.data);
-    allMessages.push(<Message key={newMessage.id} message={newMessage.content} username={newMessage.username} />);
-  });
+      let tempMessages=this.state.allMessages;
+      let newMessage=JSON.parse(eventFromWSS.data);
+      this.setState({currentUser:newMessage.user});
+      console.log("State user is ", this.state.currentUser);
+      tempMessages.push(<Message key={allMessages.length+1} message={newMessage.messageContent} username={newMessage.user}/>);
+      this.setState({allMessages:tempMessages})
+    });
   }, 300);
 }
 
   getMessageDetail(user,messageContent){
     console.log("App "+user+" "+messageContent);
     this.socket.send(JSON.stringify({type: "sendMessage", user:user,messageContent:messageContent}));
-    setTimeout(()=>{
-      let allMessages=this.state.allMessages;
-      allMessages.push(<Message key={allMessages.length+1} message={messageContent} username={user}/>);
-      this.setState({allMessages:allMessages});
-      this.setState({loading:true});
-    },1000);
+    // setTimeout(()=>{
+    //   let allMessages=this.state.allMessages;
+    //   allMessages.push(<Message key={allMessages.length+1} message={messageContent} username={user}/>);
+    //   this.setState({loading:true});
+    // },1000);
     event.preventDefault();
   }
 
