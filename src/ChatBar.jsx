@@ -15,16 +15,14 @@ class ChatBar extends Component {
   }
 
   updateMessage(event){
-    this.setState({message:event.target.value});
-    console.log("chat bar content is "+event.target.value);
-     //ReactDOM.findDOMNode(this.refs.form).value = "";
-    //console.log("Finding the chatbar class objects "+document.getElementById('newMessageHolder').value());
+    this.setState({message: ReactDOM.findDOMNode(this.refs.form).value});
   }
 
   handleSubmit(event,template){
+  let status=ReactDOM.findDOMNode(this.refs.form).value;
   ReactDOM.findDOMNode(this.refs.form).value = "";
     event.preventDefault();
-    this.props.messageDetail(this.state.user,this.state.message);
+    this.props.messageDetail(this.state.user,status);
   }
 
   render() {

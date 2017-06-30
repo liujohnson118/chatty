@@ -20,11 +20,6 @@ class App extends Component {
     this.broadCastMessage=this.broadCastMessage.bind(this);
     this.hashCode=this.hashCode.bind(this);
     this.intToRGB=this.intToRGB.bind(this);
-
-
-    this.socket.addEventListener('message', (msg) => {
-      console.log('so dumb', msg)
-    })
   }
 
   broadCastMessage(message){
@@ -48,7 +43,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount <App />");
     this.setState({loading: true});
 
     // Add a new message to the list of messages in the data store
@@ -63,7 +57,6 @@ class App extends Component {
 
       let tempMessages=this.state.allMessages;
       let newMessage = JSON.parse(eventFromWSS.data);
-      console.log("new message type is "+newMessage.type );
       let messageType=newMessage.type;
       switch(messageType){
         case "sendMessage":
@@ -92,20 +85,17 @@ class App extends Component {
           console.log("WTF is wrong");
           break;
       }
-      console.log("componentDidMount received message type "+newMessage.type+" from WSS");
     });
 
 }
 
   getMessageDetail(user,messageContent){
     event.preventDefault();
-    console.log("App "+user+" "+messageContent);
     if(user !== this.state.currentUser){
       const msg = "User "+this.state.currentUser+" has changed name to "+user;
       this.setState({currentUser:user});
       this.broadCastMessage(JSON.stringify({type:"postNotification", user:user,messageContent:msg}));
     }
-    console.log("FFFFFUUUUUCCKKK"+messageContent)
     this.broadCastMessage(JSON.stringify({type: "sendMessage", user:user,messageContent:messageContent}));
     event.preventDefault();
   }
