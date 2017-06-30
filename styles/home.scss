@@ -2,6 +2,14 @@ h1 {
   color: tomato;
 }
 
+#userCount {
+  float:right;
+  padding:25px;
+}
+
+#newMessageSubmitButton{
+  display:none;
+}
 
 body {
       background: white;
