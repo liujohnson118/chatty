@@ -16,6 +16,7 @@ class ChatBar extends Component {
 
   updateMessage(event){
     this.setState({message:event.target.value});
+    console.log("chat bar content is "+event.target.value);
      //ReactDOM.findDOMNode(this.refs.form).value = "";
     //console.log("Finding the chatbar class objects "+document.getElementById('newMessageHolder').value());
   }
