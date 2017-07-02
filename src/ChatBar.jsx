@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+/*
+* chat bar element in html page
+* Has a textarea for username and textarea for message content
+*/
 class ChatBar extends Component {
+
+  /*
+  * Constructor
+  */
   constructor(props){
     super(props);
     this.state={user:'Anonymous',message:''};
@@ -10,14 +18,23 @@ class ChatBar extends Component {
     this.handleSubmit=this.handleSubmit.bind(this);
   }
 
+  /*
+  * Function to update user state when the user has typed a new username into the username text area
+  */
   updateUser(event){
     this.setState({user:event.target.value});
   }
 
+  /*
+  * Function to update message state when a new message has been typed and enter key is pressed
+  */
   updateMessage(event){
     this.setState({message: ReactDOM.findDOMNode(this.refs.form).value});
   }
 
+  /*
+  * Function to handle submission of new message
+  */
   handleSubmit(event,template){
   let status=ReactDOM.findDOMNode(this.refs.form).value;
   ReactDOM.findDOMNode(this.refs.form).value = "";
@@ -25,6 +42,9 @@ class ChatBar extends Component {
     this.props.messageDetail(this.state.user,status);
   }
 
+  /*
+  * function to render the ChatBar element
+  */
   render() {
     return (
     <span>
