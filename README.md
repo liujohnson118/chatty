@@ -41,4 +41,4 @@ For example, if you copy a file called my_image.png into the build folder you ca
 * To post a new message, the user simply types his/her name and message in the fields and hit enter.
 * If the user changes his/her name by typing into the name box, a message stating this name change will be posted.
 
-!["page view"]()
+!["page view"](https://github.com/liujohnson118/chatty/blob/master/docs/page.png)
