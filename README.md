@@ -11,9 +11,16 @@ Install the dependencies and start the server.
 
 ```
 npm install
-npm start
-open http://localhost:3000
 ```
+Once the dependencies have been installed,
+
+`node WSS.js`
+
+Open another terminal and navigate to project foler and do
+
+`node server.js`
+
+The app should run.
 
 ### Technologies Used
 * ReactJS
