@@ -1,7 +1,7 @@
 Chatty
 =====================
 
-A simple real time chat app implemented with ReactJS and websocket server
+A real time chat app implemented with ReactJS and websocket server
 
 ### Usage
 
